@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INSIDE THE SILICON: The Science Behind Semiconductor Microchips</title>
+  <meta name="description" content="A cinematic, academic Language Lab and ECE scientific presentation explaining semiconductor physics, PN junctions, MOSFETs, and MATLAB numerical simulation.">
+  <meta name="author" content="Anuska Ghosh">
+
+  <!-- Core Theme & Layout Stylesheets -->
+  <link rel="stylesheet" href="static/css/main.css">
+  <link rel="stylesheet" href="static/css/laboratory-theme.css">
+  <link rel="stylesheet" href="static/css/cinematic-player.css">
+  <link rel="stylesheet" href="static/css/matlab-desktop.css">
+
+  <link rel="icon" type="image/svg+xml" href="static/images/lab/silicon_wafer.svg">
+</head>
+<body>
+
+  <!-- =========================================================================
+       APP HEADER & ACADEMIC CREDENTIALS BADGE
+       ========================================================================= -->
+  <header class="app-header">
+    <div class="brand-container">
+      <img src="static/images/lab/silicon_wafer.svg" alt="Silicon Wafer" class="brand-wafer-icon" />
+      <div>
+        <h1 class="brand-title">Inside The Silicon</h1>
+        <span class="brand-subtitle">The Science Behind Semiconductor Microchips</span>
+      </div>
+    </div>
+
+    <!-- Academic Metadata Badge -->
+    <div class="academic-badge">
+      <span>Student: <strong>Anuska Ghosh</strong></span>
+      <span>•</span>
+      <span>Roll: <strong>66</strong></span>
+      <span>•</span>
+      <span>ECE (Sec B4)</span>
+      <span>•</span>
+      <span>2026–2027</span>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-secondary" id="header-matlab-btn" title="Open Desktop MATLAB Workbench">
+        <span>⬢</span> MATLAB Simulator
+      </button>
+      <button class="btn btn-secondary" id="header-tech-btn" title="View Scientific Equations & Viva Questions">
+        <span>ℹ</span> Technical Specs
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- =========================================================================
+         1. HERO GATEWAY (Initial Introduction Screen)
+         ========================================================================= -->
+    <section class="hero-gateway" id="hero-gateway">
+      <img src="static/images/lab/silicon_wafer.svg" alt="300mm Patterned Silicon Wafer" class="hero-wafer-backdrop" />
+      
+      <h2 class="hero-title">Inside The Silicon</h2>
+      <p class="hero-subtitle">The Science Behind Semiconductor Microchips</p>
+
+      <p class="hero-description">
+        Join Senior Scientist <strong>Dr. Adrian</strong> and Junior Researcher <strong>Ethan</strong> inside an advanced ISO 4 cleanroom laboratory for a five-minute cinematic exploration of solid-state device physics—from covalent atomic lattices and PN junction depletion dynamics to MOSFET channel pinch-off and authentic MATLAB numerical simulation.
+      </p>
+
+      <div class="hero-academic-card">
+        <span>Course: <strong>B.Tech First Year (ECE)</strong></span>
+        <span>Department: <strong>Language Lab & ECE</strong></span>
+        <span>Student: <strong>Anuska Ghosh</strong></span>
+        <span>Roll: <strong>66</strong></span>
+        <span>Section: <strong>B4</strong></span>
+        <span>Academic Year: <strong>2026–2027</strong></span>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-large" id="start-presentation-btn">
+          <span>▶</span> Start Cinematic Presentation
+        </button>
+        <button class="btn btn-secondary btn-large" id="hero-matlab-btn">
+          <span>⬢</span> Explore MATLAB Simulator
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         2. CINEMATIC PRESENTATION PLAYER & INTERACTIVE 5-LAYER STAGE
+         ========================================================================= -->
+    <section class="presentation-container" id="presentation-section" style="display: none;">
+      <!-- Act Bookmarks Navigation Bar -->
+      <nav class="act-navigation-bar" aria-label="Act Navigation">
+        <button class="act-nav-btn active" data-act="1">
+          <span class="act-num">Act 1 (0:00)</span>
+          <span class="act-title">The Discovery</span>
+        </button>
+        <button class="act-nav-btn" data-act="2">
+          <span class="act-num">Act 2 (0:35)</span>
+          <span class="act-title">Silicon Foundation</span>
+        </button>
+        <button class="act-nav-btn" data-act="3">
+          <span class="act-num">Act 3 (1:20)</span>
+          <span class="act-title">Secret of the Junction</span>
+        </button>
+        <button class="act-nav-btn" data-act="4">
+          <span class="act-num">Act 4 (2:05)</span>
+          <span class="act-title">Microchip Revolution</span>
+        </button>
+        <button class="act-nav-btn" data-act="5">
+          <span class="act-num">Act 5 (3:00)</span>
+          <span class="act-title">MATLAB Experiment</span>
+        </button>
+        <button class="act-nav-btn" data-act="6">
+          <span class="act-num">Act 6 (4:15)</span>
+          <span class="act-title">Future of Silicon</span>
+        </button>
+      </nav>
+
+      <!-- Master 16:9 Presentation Stage with 5-Layer Stack -->
+      <div class="presentation-stage camera-wide" id="presentation-stage">
+        
+        <!-- ===================================================================
+             LAYER 0: CONTINUOUS PERSISTENT CLEANROOM BACKGROUND
+             Permanent fix for Disappearing Background Bug!
+             =================================================================== -->
+        <div class="cinematic-bg-layer" id="cinematic-bg-layer">
+          <div class="cleanroom-persistent-photo"></div>
+          <canvas id="ambient-particles-canvas" class="ambient-particles-canvas"></canvas>
+          <div class="cleanroom-vignette-overlay"></div>
+        </div>
+
+        <!-- ===================================================================
+             LAYER 1: SCIENTIFIC VISUALIZATION LAYER
+             =================================================================== -->
+        <div class="scientific-visualization-layer" id="scientific-visualization-layer">
+          
+          <!-- View 1: Act 1 Cleanroom Lab Establishing Scene -->
+          <div class="stage-view active" id="view-cleanroom_lab">
+            <div class="cleanroom-lab-center-card">
+              <div class="cleanroom-telemetry-overlay">
+                <div class="telemetry-badge">ISO 4 SEMICONDUCTOR FABRICATION SUITE</div>
+                <div class="telemetry-line"><span>FACILITY:</span><span>CLASS 10 ADVANCED RESEARCH CLEANROOM</span></div>
+                <div class="telemetry-line"><span>ENVIRONMENT:</span><span>21.0°C | 42% RH | 0.45 m/s LAMINAR AIRFLOW</span></div>
+                <div class="telemetry-line"><span>SPECIMEN:</span><span>300mm ULTRA-PURE PATTERNED SILICON WAFER</span></div>
+                <div class="telemetry-line"><span>METROLOGY:</span><span>CONFOCAL LASER PROBE &amp; SCATTEROMETRY</span></div>
+                <div class="telemetry-line"><span>STATUS:</span><span>CHARACTERIZATION TIMELINE ACTIVE</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 2: Act 2 Silicon Crystal Lattice & Bandgap -->
+          <div class="stage-view" id="view-silicon_lattice">
+            <div class="visualizer-hud-container">
+              <div class="visualizer-hud-header">
+                <span>DIAMOND CUBIC LATTICE (Eg = 1.12 eV)</span>
+                <span>ACT 2: SOLID-STATE ATOMICS</span>
+              </div>
+              <canvas id="lattice-canvas" class="canvas-visualizer"></canvas>
+              <div class="visualizer-controls-bar">
+                <button class="btn btn-secondary lattice-mode-btn active" data-mode="intrinsic">Intrinsic (Pure Si)</button>
+                <button class="btn btn-secondary lattice-mode-btn" data-mode="n-type">N-Type Doping (Phosphorus)</button>
+                <button class="btn btn-secondary lattice-mode-btn" data-mode="p-type">P-Type Doping (Boron)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 3: Act 3 PN Junction & Depletion Zone -->
+          <div class="stage-view" id="view-pn_junction">
+            <div class="visualizer-hud-container">
+              <div class="visualizer-hud-header">
+                <span>METALLURGICAL PN JUNCTION (V_bi &approx; 0.75 V)</span>
+                <span>ACT 3: SPACE-CHARGE ELECTROSTATICS</span>
+              </div>
+              <canvas id="pnj-canvas" class="canvas-visualizer"></canvas>
+              <div class="visualizer-controls-bar">
+                <button class="btn btn-secondary pnj-bias-btn active" data-bias="0.0">Equilibrium (0V Bias)</button>
+                <button class="btn btn-secondary pnj-bias-btn" data-bias="0.65">Forward Bias (+0.65V)</button>
+                <button class="btn btn-secondary pnj-bias-btn" data-bias="-2.0">Reverse Bias (-2.0V)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 4: Act 4 3D MOSFET & Channel Pinch-Off -->
+          <div class="stage-view" id="view-mosfet_transistor">
+            <div class="visualizer-hud-container">
+              <div class="visualizer-hud-header">
+                <span>3D ENHANCEMENT-MODE NMOS (V_TH = 0.70 V)</span>
+                <span>ACT 4: INVERSION LAYER PINCH-OFF</span>
+              </div>
+              <canvas id="mosfet-canvas" class="canvas-visualizer"></canvas>
+              <div class="visualizer-controls-bar mosfet-controls-bar">
+                <div class="slider-control">
+                  <span>V_GS:</span>
+                  <input type="range" id="mosfet-vgs-slider" min="0.0" max="3.0" step="0.1" value="2.0" style="width: 80px; accent-color: #00d2ff;" />
+                  <span id="mosfet-vgs-val" class="slider-val">2.00V</span>
+                </div>
+                <div class="slider-control">
+                  <span>V_DS:</span>
+                  <input type="range" id="mosfet-vds-slider" min="0.0" max="3.5" step="0.1" value="1.0" style="width: 80px; accent-color: #ffd11a;" />
+                  <span id="mosfet-vds-val" class="slider-val">1.00V</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 5: Act 5 Desktop-Style MATLAB Educational Simulator -->
+          <div class="stage-view" id="view-matlab_simulation">
+            <div id="matlab-container" class="matlab-container"></div>
+          </div>
+
+          <!-- View 6: Act 6 Integrated Circuit Multi-Scale Zoom -->
+          <div class="stage-view" id="view-ic_scale_zoom">
+            <div class="visualizer-hud-container">
+              <div class="visualizer-hud-header">
+                <span>MULTI-SCALE NANOMETROLOGY (300mm WAFER TO 3nm GATE)</span>
+                <span>ACT 6: TRANSISTOR EVOLUTION</span>
+              </div>
+              <canvas id="iczoom-canvas" class="canvas-visualizer"></canvas>
+            </div>
+          </div>
+
+        </div><!-- /#scientific-visualization-layer -->
+
+        <!-- ===================================================================
+             LAYER 2: TWO-CHARACTER CINEMATIC FOREGROUND LAYER
+             Dr. Adrian on the LEFT, Ethan on the RIGHT
+             =================================================================== -->
+        <!-- Character A: Dr. Adrian (Senior Scientist - Left) -->
+        <section id="char-adrian-anchor" class="character-anchor char-breathing" aria-label="Dr. Adrian">
+          <div class="character-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 540" width="100%" height="100%" id="svg-dr-adrian" class="char-vector-svg">
+              <defs>
+                <!-- Lighting and Skin Gradients -->
+                <linearGradient id="adr-skin" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f5ceb0" />
+                  <stop offset="70%" stop-color="#dfa47e" />
+                  <stop offset="100%" stop-color="#c98a63" />
+                </linearGradient>
+                <linearGradient id="adr-hood" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="60%" stop-color="#e1ebf5" />
+                  <stop offset="100%" stop-color="#b8ccd8" />
+                </linearGradient>
+                <linearGradient id="adr-suit" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f8fafc" />
+                  <stop offset="50%" stop-color="#e2e8f0" />
+                  <stop offset="100%" stop-color="#cbd5e1" />
+                </linearGradient>
+                <linearGradient id="adr-cyan-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#00d2ff" />
+                  <stop offset="100%" stop-color="#0088cc" />
+                </linearGradient>
+                <linearGradient id="adr-wafer-disc" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2d3748" />
+                  <stop offset="25%" stop-color="#4a5568" />
+                  <stop offset="50%" stop-color="#00d2ff" stop-opacity="0.8" />
+                  <stop offset="75%" stop-color="#718096" />
+                  <stop offset="100%" stop-color="#1a202c" />
+                </linearGradient>
+                <linearGradient id="adr-wafer-sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ffd11a" stop-opacity="0.8" />
+                  <stop offset="35%" stop-color="#00f2a9" stop-opacity="0.8" />
+                  <stop offset="70%" stop-color="#00d2ff" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#e056fd" stop-opacity="0.7" />
+                </linearGradient>
+                <linearGradient id="adr-glove" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#26c6da" />
+                  <stop offset="100%" stop-color="#00838f" />
+                </linearGradient>
+
+                <!-- Filters for Glow and Shadows -->
+                <filter id="adr-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <style>
+                /* In-SVG Keyframe Animations for Vector Body Parts */
+                #adrian-root {
+                  transform-origin: 160px 520px;
+                }
+
+                /* Gentle Idle Breathing */
+                .adr-idle-body {
+                  animation: adrBreathe 4.5s ease-in-out infinite;
+                  transform-origin: 160px 420px;
+                }
+                @keyframes adrBreathe {
+                  0%, 100% { transform: translateY(0px) scale(1, 1); }
+                  50% { transform: translateY(-4px) scale(1.008, 1.012); }
+                }
+
+                /* Head Tilt and Subtle Expression */
+                .adr-head-group {
+                  animation: adrHeadIdle 6s ease-in-out infinite;
+                  transform-origin: 160px 140px;
+                }
+                @keyframes adrHeadIdle {
+                  0%, 100% { transform: rotate(0deg); }
+                  35% { transform: rotate(-1.5deg) translateY(-1px); }
+                  75% { transform: rotate(1deg) translateY(0px); }
+                }
+
+                /* Natural Eye Blinking */
+                .adr-eyelid {
+                  animation: adrBlink 5.2s infinite;
+                  transform-origin: center;
+                }
+                @keyframes adrBlink {
+                  0%, 96%, 100% { transform: scaleY(0); }
+                  98% { transform: scaleY(1); }
+                }
+
+                /* Explaining Right Arm Articulation (Gestures when speaking) */
+                .adr-gesturing-arm {
+                  transform-origin: 215px 230px;
+                  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+                  animation: adrArmResting 5s ease-in-out infinite;
+                }
+                @keyframes adrArmResting {
+                  0%, 100% { transform: rotate(0deg); }
+                  50% { transform: rotate(2deg) translateY(-2px); }
+                }
+
+                /* Speaking State Activations */
+                .is-speaking .adr-gesturing-arm {
+                  animation: adrArmExplain 2.2s ease-in-out infinite alternate !important;
+                }
+                @keyframes adrArmExplain {
+                  0% { transform: rotate(-4deg) translateY(-6px); }
+                  35% { transform: rotate(8deg) translateY(-16px); }
+                  70% { transform: rotate(3deg) translateY(-10px); }
+                  100% { transform: rotate(14deg) translateY(-22px); }
+                }
+
+                .is-speaking .adr-head-group {
+                  animation: adrHeadSpeaking 2.6s ease-in-out infinite alternate !important;
+                }
+                @keyframes adrHeadSpeaking {
+                  0% { transform: rotate(-2deg) translateY(-2px); }
+                  50% { transform: rotate(2deg) translateY(1px); }
+                  100% { transform: rotate(-1deg) translateY(-3px); }
+                }
+
+                /* Animated Mouth Speech Flapping */
+                .adr-mouth-rest { display: block; }
+                .adr-mouth-open { display: none; }
+                .is-speaking .adr-mouth-rest { display: none; }
+                .is-speaking .adr-mouth-open {
+                  display: block;
+                  animation: adrMouthFlap 0.26s ease-in-out infinite alternate;
+                  transform-origin: 160px 145px;
+                }
+                @keyframes adrMouthFlap {
+                  0% { transform: scaleY(0.4) scaleX(0.9); }
+                  50% { transform: scaleY(1.3) scaleX(1.1); }
+                  100% { transform: scaleY(0.8) scaleX(1.0); }
+                }
+
+                /* Listening Nod State */
+                .is-listening .adr-head-group {
+                  animation: adrHeadListen 3.6s ease-in-out infinite !important;
+                }
+                @keyframes adrHeadListen {
+                  0%, 100% { transform: rotate(0deg) translateY(0); }
+                  40% { transform: rotate(1.8deg) translateY(2px); }
+                  70% { transform: rotate(0.8deg) translateY(0px); }
+                }
+
+                /* 300mm Silicon Wafer Rotating Iridescent Sheen */
+                .adr-wafer-sheen-beam {
+                  animation: waferIridescent 6s linear infinite;
+                  transform-origin: 105px 375px;
+                }
+                @keyframes waferIridescent {
+                  0% { transform: rotate(0deg); opacity: 0.6; }
+                  50% { transform: rotate(180deg); opacity: 0.85; }
+                  100% { transform: rotate(360deg); opacity: 0.6; }
+                }
+              </style>
+
+              <g id="adrian-root" class="adr-idle-body">
+                <!-- SHADOW AT FEET -->
+                <ellipse cx="160" cy="528" rx="85" ry="12" fill="#000000" opacity="0.45" />
+
+                <!-- =====================================================================
+                     1. LEGS and LOWER CLEANROOM SUIT
+                     ===================================================================== -->
+                <g id="adrian-legs">
+                  <!-- Left Leg (viewer's left) -->
+                  <path d="M 125 380 L 118 490 L 110 520 L 142 522 L 148 490 L 152 380 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="1.8" />
+                  <!-- Right Leg (viewer's right) -->
+                  <path d="M 168 380 L 172 490 L 178 522 L 210 520 L 202 490 L 195 380 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="1.8" />
+                  <!-- Cleanroom Booties with Cyan Anti-static Soles -->
+                  <path d="M 106 515 C 106 510 114 505 130 505 C 145 505 148 512 148 524 L 106 524 Z" fill="#e2e8f0" stroke="#00d2ff" stroke-width="1.6" />
+                  <rect x="106" y="522" width="42" height="4" rx="2" fill="#00d2ff" />
+                  <path d="M 172 515 C 172 510 180 505 196 505 C 211 505 214 512 214 524 L 172 524 Z" fill="#e2e8f0" stroke="#00d2ff" stroke-width="1.6" />
+                  <rect x="172" y="522" width="42" height="4" rx="2" fill="#00d2ff" />
+                </g>
+
+                <!-- =====================================================================
+                     2. TORSO and CLEANROOM BUNNY-SUIT
+                     ===================================================================== -->
+                <g id="adrian-torso">
+                  <!-- Main Coat / Suit -->
+                  <path d="M 112 215 C 105 260 108 340 115 395 C 135 402 185 402 205 395 C 212 340 215 260 208 215 C 190 205 130 205 112 215 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="2" />
+
+                  <!-- Anti-static Cyan Grid Pattern on Cleanroom Gown -->
+                  <g opacity="0.4" stroke="#00d2ff" stroke-width="0.75" fill="none">
+                    <line x1="120" y1="230" x2="200" y2="230" />
+                    <line x1="116" y1="260" x2="204" y2="260" />
+                    <line x1="114" y1="290" x2="206" y2="290" />
+                    <line x1="114" y1="320" x2="206" y2="320" />
+                    <line x1="115" y1="350" x2="205" y2="350" />
+                    <line x1="116" y1="380" x2="204" y2="380" />
+                    <line x1="135" y1="215" x2="135" y2="395" />
+                    <line x1="150" y1="210" x2="150" y2="398" />
+                    <line x1="165" y1="210" x2="165" y2="398" />
+                    <line x1="180" y1="215" x2="180" y2="395" />
+                  </g>
+
+                  <!-- Zipper Seam and Collar Flap -->
+                  <line x1="160" y1="195" x2="160" y2="398" stroke="#64748b" stroke-width="2" />
+                  <path d="M 148 195 L 160 215 L 172 195" fill="none" stroke="#00d2ff" stroke-width="2.5" />
+
+                  <!-- Senior Device Scientist ID Badge -->
+                  <g id="adrian-id-badge" transform="translate(125, 240)">
+                    <rect x="0" y="0" width="28" height="38" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2" />
+                    <rect x="0" y="0" width="28" height="8" rx="2" fill="#00d2ff" />
+                    <!-- Miniature photo and barcode -->
+                    <rect x="4" y="11" width="10" height="12" rx="1" fill="#cbd5e1" />
+                    <line x1="16" y1="13" x2="25" y2="13" stroke="#475569" stroke-width="1" />
+                    <line x1="16" y1="17" x2="24" y2="17" stroke="#475569" stroke-width="1" />
+                    <line x1="16" y1="21" x2="22" y2="21" stroke="#475569" stroke-width="1" />
+                    <line x1="4" y1="28" x2="24" y2="28" stroke="#0088cc" stroke-width="1.8" />
+                    <text x="14" y="35" font-family="monospace" font-size="4" font-weight="bold" fill="#334155" text-anchor="middle">DR. ADRIAN</text>
+                  </g>
+                </g>
+
+                <!-- =====================================================================
+                     3. LEFT ARM: HOLDING 300mm SILICON WAFER
+                     ===================================================================== -->
+                <g id="adrian-left-arm">
+                  <!-- Upper arm -->
+                  <path d="M 112 215 C 92 235 84 275 88 320 L 112 325 C 108 285 115 245 125 220 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="1.8" />
+                  <!-- Forearm extending forward to hold wafer -->
+                  <path d="M 88 320 C 88 350 96 375 115 385 L 126 368 C 112 355 108 340 112 325 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Cyan Cleanroom Nitrile Glove -->
+                  <path d="M 112 375 C 114 365 125 365 128 375 C 132 385 125 398 116 395 Z" fill="url(#adr-glove)" stroke="#00838f" stroke-width="1.2" />
+
+                  <!-- 300mm Patterned Silicon Wafer with Iridescent Diffraction Ring -->
+                  <g id="adrian-300mm-wafer" transform="translate(40, 310)">
+                    <!-- Wafer Disc (3/4 perspective ellipse) -->
+                    <ellipse cx="65" cy="65" rx="58" ry="46" fill="url(#adr-wafer-disc)" stroke="#a0aec0" stroke-width="2" />
+
+                    <!-- Microchip Dies Grid (Patterned etched dies) -->
+                    <g stroke="#00d2ff" stroke-width="0.5" opacity="0.6" fill="none">
+                      <ellipse cx="65" cy="65" rx="52" ry="40" />
+                      <line x1="25" y1="45" x2="105" y2="45" />
+                      <line x1="15" y1="55" x2="115" y2="55" />
+                      <line x1="12" y1="65" x2="118" y2="65" />
+                      <line x1="15" y1="75" x2="115" y2="75" />
+                      <line x1="25" y1="85" x2="105" y2="85" />
+                      <line x1="45" y1="28" x2="45" y2="102" />
+                      <line x1="55" y1="26" x2="55" y2="104" />
+                      <line x1="65" y1="25" x2="65" y2="105" />
+                      <line x1="75" y1="26" x2="75" y2="104" />
+                      <line x1="85" y1="28" x2="85" y2="102" />
+                    </g>
+
+                    <!-- Dynamic Iridescent Diffraction Sheen Beam -->
+                    <g class="adr-wafer-sheen-beam">
+                      <polygon points="65,65 15,30 30,18" fill="url(#adr-wafer-sheen)" />
+                      <polygon points="65,65 105,95 118,85" fill="url(#adr-wafer-sheen)" />
+                    </g>
+
+                    <!-- Specular Highlight Arc -->
+                    <path d="M 22 55 A 50 38 0 0 1 85 28" stroke="#ffffff" stroke-width="2.5" fill="none" opacity="0.75" />
+
+                    <!-- Notch (Orientation Flat) -->
+                    <polygon points="63,111 67,111 65,108" fill="#1a202c" />
+                  </g>
+
+                  <!-- Thumb clamping over wafer edge -->
+                  <ellipse cx="98" cy="382" rx="5" ry="4" fill="url(#adr-glove)" stroke="#00838f" stroke-width="1" />
+                </g>
+
+                <!-- =====================================================================
+                     4. RIGHT ARM: EXPLAINING / GESTURING ARM
+                     ===================================================================== -->
+                <g id="adrian-right-arm" class="adr-gesturing-arm">
+                  <!-- Upper Arm -->
+                  <path d="M 205 215 C 228 235 240 270 242 305 L 218 312 C 215 280 208 245 198 220 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Forearm and Elbow Joint (Angled upward for scientific explaining) -->
+                  <path d="M 242 305 C 255 330 268 340 280 325 L 265 305 C 255 305 245 302 218 312 Z" fill="url(#adr-suit)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Cyan Glove and Gesturing Hand (Pointing index and open thumb) -->
+                  <g id="adrian-gesture-hand" transform="translate(265, 305)">
+                    <path d="M 5 10 C 12 5 22 -4 28 -8 C 30 -10 32 -6 28 -2 C 22 4 15 12 10 16 Z" fill="url(#adr-glove)" stroke="#00838f" stroke-width="1.2" />
+                    <!-- Clenched fingers (middle, ring, pinky) -->
+                    <circle cx="12" cy="14" r="5" fill="url(#adr-glove)" />
+                    <circle cx="14" cy="19" r="4.5" fill="url(#adr-glove)" />
+                    <circle cx="12" cy="23" r="4" fill="url(#adr-glove)" />
+                    <!-- Thumb pointing up -->
+                    <path d="M 4 8 C 8 2 12 -2 15 -1 C 14 4 10 9 6 12 Z" fill="url(#adr-glove)" stroke="#00838f" stroke-width="1" />
+                  </g>
+                </g>
+
+                <!-- =====================================================================
+                     5. HEAD, FACE and CLEANROOM HOOD
+                     ===================================================================== -->
+                <g id="adrian-head" class="adr-head-group">
+                  <!-- Cleanroom Bunny-suit Hood (Back and Contour) -->
+                  <path d="M 124 165 C 112 140 114 85 135 62 C 150 48 170 48 185 62 C 206 85 208 140 196 165 C 188 185 132 185 124 165 Z" fill="url(#adr-hood)" stroke="#94a3b8" stroke-width="2" />
+
+                  <!-- Neck inside Hood -->
+                  <rect x="148" y="160" width="24" height="24" rx="4" fill="url(#adr-skin)" />
+
+                  <!-- Face Oval (Exposed within hood aperture) -->
+                  <path d="M 132 125 C 130 98 138 82 160 82 C 182 82 190 98 188 125 C 188 148 178 162 160 162 C 142 162 132 148 132 125 Z" fill="url(#adr-skin)" />
+
+                  <!-- Silvered Temple Hair Peeking Out Under Hood -->
+                  <path d="M 134 102 C 136 92 144 85 158 84 C 150 87 142 94 138 104 Z" fill="#475569" />
+                  <path d="M 134 105 C 137 101 142 98 146 96" stroke="#cbd5e1" stroke-width="1.2" fill="none" />
+                  <path d="M 186 102 C 184 92 176 85 162 84 C 170 87 178 94 182 104 Z" fill="#475569" />
+                  <path d="M 186 105 C 183 101 178 98 174 96" stroke="#cbd5e1" stroke-width="1.2" fill="none" />
+
+                  <!-- Ears inside hood contour -->
+                  <ellipse cx="132" cy="126" rx="4" ry="7" fill="#dfa47e" />
+                  <ellipse cx="188" cy="126" rx="4" ry="7" fill="#dfa47e" />
+
+                  <!-- Eyebrows (Senior, Experienced, Calm Arch) -->
+                  <path d="M 140 108 Q 148 103 154 107" stroke="#334155" stroke-width="2.4" stroke-linecap="round" fill="none" />
+                  <path d="M 166 107 Q 172 103 180 108" stroke="#334155" stroke-width="2.4" stroke-linecap="round" fill="none" />
+
+                  <!-- Eyes (Observant, Deep Blue/Gray Iris) -->
+                  <!-- Left Eye -->
+                  <g transform="translate(141, 114)">
+                    <ellipse cx="6" cy="3" rx="5" ry="3.2" fill="#ffffff" />
+                    <circle cx="6.5" cy="3" r="2.2" fill="#1e293b" />
+                    <circle cx="7" cy="2.2" r="0.8" fill="#ffffff" />
+                    <!-- Animated Blinking Eyelid -->
+                    <rect x="0" y="0" width="12" height="7" rx="2" fill="#c98a63" class="adr-eyelid" />
+                  </g>
+                  <!-- Right Eye -->
+                  <g transform="translate(167, 114)">
+                    <ellipse cx="6" cy="3" rx="5" ry="3.2" fill="#ffffff" />
+                    <circle cx="5.5" cy="3" r="2.2" fill="#1e293b" />
+                    <circle cx="6" cy="2.2" r="0.8" fill="#ffffff" />
+                    <!-- Animated Blinking Eyelid -->
+                    <rect x="0" y="0" width="12" height="7" rx="2" fill="#c98a63" class="adr-eyelid" />
+                  </g>
+
+                  <!-- Senior Character Character Lines (Crow's feet / Wisdom) -->
+                  <path d="M 135 116 L 138 117" stroke="#b47453" stroke-width="0.8" fill="none" />
+                  <path d="M 185 116 L 182 117" stroke="#b47453" stroke-width="0.8" fill="none" />
+
+                  <!-- Titanium Semiconductor Safety Glasses -->
+                  <g id="adrian-safety-glasses">
+                    <!-- Left Frame -->
+                    <rect x="137" y="108" width="18" height="15" rx="3.5" fill="none" stroke="#64748b" stroke-width="1.8" />
+                    <!-- Right Frame -->
+                    <rect x="165" y="108" width="18" height="15" rx="3.5" fill="none" stroke="#64748b" stroke-width="1.8" />
+                    <!-- Bridge and Side Shields -->
+                    <line x1="155" y1="114" x2="165" y2="114" stroke="#64748b" stroke-width="1.8" />
+                    <line x1="137" y1="112" x2="131" y2="115" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="183" y1="112" x2="189" y2="115" stroke="#64748b" stroke-width="1.5" />
+                    <!-- Anti-reflective Cyan Lens Flare -->
+                    <path d="M 139 110 L 148 120" stroke="#00d2ff" stroke-width="1.2" opacity="0.65" stroke-linecap="round" />
+                    <path d="M 167 110 L 176 120" stroke="#00d2ff" stroke-width="1.2" opacity="0.65" stroke-linecap="round" />
+                  </g>
+
+                  <!-- Nose (Distinguished Profile) -->
+                  <path d="M 158 116 L 161 130 L 157 132" stroke="#b47453" stroke-width="1.6" fill="none" stroke-linejoin="round" />
+
+                  <!-- MOUTH: RESTING and ANIMATED SPEAKING STATES -->
+                  <g id="adrian-mouth-group">
+                    <!-- Resting Mouth (Calm smile / thoughtful line) -->
+                    <path d="M 152 144 Q 160 148 168 144" stroke="#924a2c" stroke-width="2" fill="none" stroke-linecap="round" class="adr-mouth-rest" />
+
+                    <!-- Speaking Animated Mouth (Viseme aperture that flaps during dialogue) -->
+                    <g class="adr-mouth-open">
+                      <ellipse cx="160" cy="145" rx="6.5" ry="4.5" fill="#541b12" stroke="#924a2c" stroke-width="1.2" />
+                      <!-- Teeth / Tongue -->
+                      <path d="M 155 143 Q 160 144 165 143" stroke="#ffffff" stroke-width="1.8" fill="none" />
+                      <path d="M 157 147 Q 160 148 163 147" stroke="#e17055" stroke-width="1.6" fill="none" />
+                    </g>
+                  </g>
+
+                  <!-- Cleanroom Hood Chin Guard -->
+                  <path d="M 142 160 C 150 166 170 166 178 160 C 182 172 138 172 142 160 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.2" />
+                </g>
+              </g>
+            </svg>
+            <div class="char-nameplate nameplate-adrian">
+              <div class="char-indicator-dot"></div>
+              <div class="char-id-block">
+                <span class="char-title">DR. ADRIAN</span>
+                <span class="char-role">Senior Scientist</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Character B: Ethan (Junior Researcher - Right) -->
+        <section id="char-ethan-anchor" class="character-anchor char-breathing" aria-label="Ethan">
+          <div class="character-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 540" width="100%" height="100%" id="svg-ethan" class="char-vector-svg">
+              <defs>
+                <!-- Lighting and Skin Gradients -->
+                <linearGradient id="eth-skin" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fedac0" />
+                  <stop offset="70%" stop-color="#e8b18d" />
+                  <stop offset="100%" stop-color="#cf946f" />
+                </linearGradient>
+                <linearGradient id="eth-hair" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#4a3525" />
+                  <stop offset="60%" stop-color="#2d1f15" />
+                  <stop offset="100%" stop-color="#19100a" />
+                </linearGradient>
+                <linearGradient id="eth-coat" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="50%" stop-color="#e6edf2" />
+                  <stop offset="100%" stop-color="#c5d3dc" />
+                </linearGradient>
+                <linearGradient id="eth-shirt" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0f3458" />
+                  <stop offset="100%" stop-color="#071d33" />
+                </linearGradient>
+                <linearGradient id="eth-mint-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#00f2a9" />
+                  <stop offset="100%" stop-color="#00a876" />
+                </linearGradient>
+                <linearGradient id="eth-tablet-screen" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#061c24" />
+                  <stop offset="50%" stop-color="#0a2a36" />
+                  <stop offset="100%" stop-color="#030e12" />
+                </linearGradient>
+                <linearGradient id="eth-glove" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00e676" />
+                  <stop offset="100%" stop-color="#00897b" />
+                </linearGradient>
+              </defs>
+
+              <style>
+                /* In-SVG Keyframe Animations for Ethan */
+                #ethan-root {
+                  transform-origin: 160px 520px;
+                }
+
+                /* Idle Breathing */
+                .eth-idle-body {
+                  animation: ethBreathe 4.2s ease-in-out infinite;
+                  transform-origin: 160px 420px;
+                }
+                @keyframes ethBreathe {
+                  0%, 100% { transform: translateY(0px) scale(1, 1); }
+                  50% { transform: translateY(-3.5px) scale(1.006, 1.01); }
+                }
+
+                /* Curious Head Tilt and Natural Shift */
+                .eth-head-group {
+                  animation: ethHeadIdle 5.5s ease-in-out infinite;
+                  transform-origin: 160px 145px;
+                }
+                @keyframes ethHeadIdle {
+                  0%, 100% { transform: rotate(0deg); }
+                  40% { transform: rotate(2deg) translateY(-1px); }
+                  80% { transform: rotate(-1deg) translateY(0px); }
+                }
+
+                /* Eye Blinking */
+                .eth-eyelid {
+                  animation: ethBlink 4.8s infinite;
+                  transform-origin: center;
+                }
+                @keyframes ethBlink {
+                  0%, 95%, 100% { transform: scaleY(0); }
+                  97.5% { transform: scaleY(1); }
+                }
+
+                /* Tablet Waveform Screen Glow */
+                .eth-tablet-wave {
+                  animation: ethWavePulse 2s ease-in-out infinite alternate;
+                }
+                @keyframes ethWavePulse {
+                  0% { opacity: 0.7; }
+                  100% { opacity: 1; filter: drop-shadow(0 0 5px #00f2a9); }
+                }
+
+                /* Stylus Questioning Arm Articulation */
+                .eth-stylus-arm {
+                  transform-origin: 105px 235px;
+                  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+                  animation: ethStylusIdle 5s ease-in-out infinite;
+                }
+                @keyframes ethStylusIdle {
+                  0%, 100% { transform: rotate(0deg); }
+                  50% { transform: rotate(-2deg) translateY(-2px); }
+                }
+
+                /* Speaking State Activations */
+                .is-speaking .eth-stylus-arm {
+                  animation: ethArmInquire 2s ease-in-out infinite alternate !important;
+                }
+                @keyframes ethArmInquire {
+                  0% { transform: rotate(2deg) translateY(-4px); }
+                  35% { transform: rotate(-10deg) translateY(-14px); }
+                  70% { transform: rotate(-4deg) translateY(-8px); }
+                  100% { transform: rotate(-15deg) translateY(-18px); }
+                }
+
+                .is-speaking .eth-head-group {
+                  animation: ethHeadSpeaking 2.4s ease-in-out infinite alternate !important;
+                }
+                @keyframes ethHeadSpeaking {
+                  0% { transform: rotate(1deg) translateY(-2px); }
+                  50% { transform: rotate(-2.5deg) translateY(0px); }
+                  100% { transform: rotate(2deg) translateY(-3px); }
+                }
+
+                /* Animated Mouth Speech Flapping */
+                .eth-mouth-rest { display: block; }
+                .eth-mouth-open { display: none; }
+                .is-speaking .eth-mouth-rest { display: none; }
+                .is-speaking .eth-mouth-open {
+                  display: block;
+                  animation: ethMouthFlap 0.24s ease-in-out infinite alternate;
+                  transform-origin: 160px 150px;
+                }
+                @keyframes ethMouthFlap {
+                  0% { transform: scaleY(0.4) scaleX(0.9); }
+                  50% { transform: scaleY(1.35) scaleX(1.1); }
+                  100% { transform: scaleY(0.75) scaleX(1.0); }
+                }
+
+                /* Listening Nod State (When Dr. Adrian speaks) */
+                .is-listening .eth-head-group {
+                  animation: ethHeadListen 3s ease-in-out infinite !important;
+                }
+                @keyframes ethHeadListen {
+                  0%, 100% { transform: rotate(0deg) translateY(0); }
+                  35% { transform: rotate(-2deg) translateY(3px); }
+                  65% { transform: rotate(-0.5deg) translateY(1px); }
+                }
+              </style>
+
+              <g id="ethan-root" class="eth-idle-body">
+                <!-- SHADOW AT FEET -->
+                <ellipse cx="160" cy="528" rx="85" ry="12" fill="#000000" opacity="0.45" />
+
+                <!-- =====================================================================
+                     1. LEGS and CLEANROOM TROUSERS
+                     ===================================================================== -->
+                <g id="ethan-legs">
+                  <!-- Left Leg (viewer's left) -->
+                  <path d="M 125 385 L 120 490 L 112 520 L 144 522 L 148 490 L 152 385 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="1.8" />
+                  <!-- Right Leg (viewer's right) -->
+                  <path d="M 168 385 L 172 490 L 178 522 L 210 520 L 202 490 L 195 385 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="1.8" />
+                  <!-- Cleanroom Booties with Mint Anti-static Soles -->
+                  <path d="M 108 515 C 108 510 116 505 132 505 C 147 505 150 512 150 524 L 108 524 Z" fill="#e2e8f0" stroke="#00f2a9" stroke-width="1.6" />
+                  <rect x="108" y="522" width="42" height="4" rx="2" fill="#00f2a9" />
+                  <path d="M 172 515 C 172 510 180 505 196 505 C 211 505 214 512 214 524 L 172 524 Z" fill="#e2e8f0" stroke="#00f2a9" stroke-width="1.6" />
+                  <rect x="172" y="522" width="42" height="4" rx="2" fill="#00f2a9" />
+                </g>
+
+                <!-- =====================================================================
+                     2. TORSO and CLEANROOM LAB COAT
+                     ===================================================================== -->
+                <g id="ethan-torso">
+                  <!-- Main Cleanroom Coat (Slightly leaner, younger silhouette) -->
+                  <path d="M 115 215 C 108 260 110 345 116 398 C 135 404 185 404 204 398 C 210 345 212 260 205 215 C 188 206 132 206 115 215 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="2" />
+
+                  <!-- Mint Anti-static Grid Lines -->
+                  <g opacity="0.35" stroke="#00f2a9" stroke-width="0.75" fill="none">
+                    <line x1="120" y1="235" x2="200" y2="235" />
+                    <line x1="116" y1="265" x2="204" y2="265" />
+                    <line x1="114" y1="295" x2="206" y2="295" />
+                    <line x1="114" y1="325" x2="206" y2="325" />
+                    <line x1="115" y1="355" x2="205" y2="355" />
+                    <line x1="116" y1="385" x2="204" y2="385" />
+                    <line x1="135" y1="215" x2="135" y2="398" />
+                    <line x1="150" y1="210" x2="150" y2="400" />
+                    <line x1="165" y1="210" x2="165" y2="400" />
+                    <line x1="180" y1="215" x2="180" y2="398" />
+                  </g>
+
+                  <!-- Tech Polo Collar visible under open coat collar -->
+                  <polygon points="160,205 146,225 160,238 174,225" fill="url(#eth-shirt)" />
+                  <!-- Coat Lapels -->
+                  <path d="M 142 210 L 152 245 L 160 210 L 168 245 L 178 210" fill="none" stroke="#00f2a9" stroke-width="2" />
+
+                  <!-- Junior Researcher Lanyard and Badge (Updated to Anuska Ghosh's research peer) -->
+                  <g id="ethan-lanyard-badge" transform="translate(144, 215)">
+                    <!-- Lanyard Ribbons -->
+                    <path d="M 5 0 L 12 35 L 20 35 L 27 0" fill="none" stroke="#00f2a9" stroke-width="1.8" />
+                    <!-- Badge Card -->
+                    <g transform="translate(4, 34)">
+                      <rect x="0" y="0" width="24" height="34" rx="2.5" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2" />
+                      <rect x="0" y="0" width="24" height="7" rx="1.5" fill="#00f2a9" />
+                      <rect x="3" y="10" width="9" height="11" rx="1" fill="#cbd5e1" />
+                      <line x1="14" y1="12" x2="21" y2="12" stroke="#475569" stroke-width="0.9" />
+                      <line x1="14" y1="15" x2="20" y2="15" stroke="#475569" stroke-width="0.9" />
+                      <line x1="14" y1="18" x2="19" y2="18" stroke="#475569" stroke-width="0.9" />
+                      <line x1="3" y1="24" x2="21" y2="24" stroke="#00a876" stroke-width="1.5" />
+                      <text x="12" y="31" font-family="monospace" font-size="3.8" font-weight="bold" fill="#1e293b" text-anchor="middle">ETHAN</text>
+                    </g>
+                  </g>
+                </g>
+
+                <!-- =====================================================================
+                     3. RIGHT ARM: HOLDING QUESTIONING INSPECTION STYLUS
+                     (Facing toward center screen / Dr. Adrian)
+                     ===================================================================== -->
+                <g id="ethan-right-arm" class="eth-stylus-arm">
+                  <!-- Upper arm -->
+                  <path d="M 116 218 C 96 238 88 275 88 315 L 112 320 C 110 282 118 245 128 222 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Forearm and Elbow Joint (Angled forward questioning with inspection stylus) -->
+                  <path d="M 88 315 C 80 340 70 355 55 340 L 72 325 C 80 325 90 320 112 320 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Mint Cleanroom Glove holding stylus -->
+                  <g id="ethan-stylus-hand" transform="translate(42, 332)">
+                    <path d="M 15 15 C 10 10 5 8 2 12 C -1 16 3 20 8 18 Z" fill="url(#eth-glove)" stroke="#00897b" stroke-width="1.2" />
+                    <circle cx="10" cy="14" r="5" fill="url(#eth-glove)" />
+                    <circle cx="8" cy="19" r="4.5" fill="url(#eth-glove)" />
+
+                    <!-- High-Precision Digital Wafer Inspection Stylus -->
+                    <polygon points="-8,-6 24,26 22,28 -10,-4" fill="#64748b" stroke="#334155" stroke-width="0.8" />
+                    <polygon points="-8,-6 -14,-12 -12,-14 -6,-8" fill="#00f2a9" />
+                    <!-- Glowing Sensor Tip -->
+                    <circle cx="-13" cy="-13" r="3" fill="#00f2a9" filter="url(#eth-glow)" />
+                  </g>
+                </g>
+
+                <!-- =====================================================================
+                     4. LEFT ARM: HOLDING DIGITAL DIAGNOSTIC TABLET
+                     ===================================================================== -->
+                <g id="ethan-left-arm">
+                  <!-- Upper arm -->
+                  <path d="M 204 218 C 224 238 232 275 234 320 L 210 325 C 208 285 202 248 192 222 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Forearm wrapping around tablet -->
+                  <path d="M 234 320 C 234 350 225 380 205 390 L 195 372 C 210 360 214 345 210 325 Z" fill="url(#eth-coat)" stroke="#94a3b8" stroke-width="1.8" />
+
+                  <!-- Digital Semiconductor Diagnostic Tablet -->
+                  <g id="ethan-tablet" transform="translate(195, 305)">
+                    <!-- Tablet Frame (Angled 3/4 perspective) -->
+                    <rect x="0" y="0" width="75" height="95" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="2.5" transform="rotate(-12)" />
+
+                    <!-- Live Glowing Screen -->
+                    <rect x="5" y="6" width="65" height="83" rx="3" fill="url(#eth-tablet-screen)" stroke="#00f2a9" stroke-width="1" transform="rotate(-12)" />
+
+                    <!-- Live Waveform and Telemetry on Screen -->
+                    <g transform="rotate(-12)" class="eth-tablet-wave">
+                      <!-- Header Bar -->
+                      <rect x="5" y="6" width="65" height="10" fill="#00f2a9" opacity="0.25" />
+                      <text x="8" y="13" font-family="monospace" font-size="5" fill="#00f2a9" font-weight="bold">CONFOCAL PROBE</text>
+
+                      <!-- Animated MOSFET/Lattice Waveform -->
+                      <path d="M 8 35 Q 22 18 36 32 T 64 25" fill="none" stroke="#00f2a9" stroke-width="1.6" />
+                      <path d="M 8 50 Q 25 38 42 48 T 64 42" fill="none" stroke="#00d2ff" stroke-width="1.4" opacity="0.8" />
+
+                      <!-- Status Grid -->
+                      <rect x="8" y="62" width="26" height="12" rx="1.5" fill="#0a3344" stroke="#00f2a9" stroke-width="0.8" />
+                      <text x="11" y="70" font-family="monospace" font-size="4" fill="#00f2a9">V_GS:2.0V</text>
+
+                      <rect x="38" y="62" width="28" height="12" rx="1.5" fill="#0a3344" stroke="#00d2ff" stroke-width="0.8" />
+                      <text x="41" y="70" font-family="monospace" font-size="4" fill="#00d2ff">ID:0.85mA</text>
+
+                      <!-- Blinking Live Status Beacon -->
+                      <circle cx="62" cy="11" r="2" fill="#00f2a9" />
+                    </g>
+
+                    <!-- Mint Glove Clamping Tablet Edge -->
+                    <ellipse cx="2" cy="55" rx="6" ry="8" fill="url(#eth-glove)" stroke="#00897b" stroke-width="1" transform="rotate(-12)" />
+                  </g>
+                </g>
+
+                <!-- =====================================================================
+                     5. HEAD, HAIR and FACE
+                     ===================================================================== -->
+                <g id="ethan-head" class="eth-head-group">
+                  <!-- Neck -->
+                  <rect x="148" y="160" width="24" height="24" rx="4" fill="url(#eth-skin)" />
+
+                  <!-- Head Base and Jaw (Youthful, energetic contour) -->
+                  <path d="M 132 125 C 130 96 138 80 160 80 C 182 80 190 96 188 125 C 188 150 176 164 160 164 C 144 164 132 150 132 125 Z" fill="url(#eth-skin)" />
+
+                  <!-- Ears -->
+                  <ellipse cx="131" cy="128" rx="4.5" ry="7.5" fill="#e8b18d" />
+                  <ellipse cx="189" cy="128" rx="4.5" ry="7.5" fill="#e8b18d" />
+
+                  <!-- Modern Volumetric Hair (Styled, layered brush-up) -->
+                  <path d="M 129 110 C 126 82 136 58 160 58 C 184 58 194 82 191 110 C 184 94 175 86 160 86 C 145 86 136 94 129 110 Z" fill="url(#eth-hair)" />
+                  <!-- Textured hair tufts -->
+                  <path d="M 142 66 Q 155 52 170 60 Q 185 54 188 72 Q 174 65 160 67 Q 146 64 142 66 Z" fill="#6a4c35" />
+                  <path d="M 130 105 C 132 94 138 86 148 82" stroke="#6a4c35" stroke-width="1.8" fill="none" stroke-linecap="round" />
+                  <path d="M 190 105 C 188 94 182 86 172 82" stroke="#6a4c35" stroke-width="1.8" fill="none" stroke-linecap="round" />
+
+                  <!-- Eyebrows (Dynamic, Inquisitive, Questioning Arch) -->
+                  <path d="M 139 108 Q 147 101 154 105" stroke="#2d1f15" stroke-width="2.6" stroke-linecap="round" fill="none" />
+                  <path d="M 166 104 Q 173 100 181 106" stroke="#2d1f15" stroke-width="2.6" stroke-linecap="round" fill="none" />
+
+                  <!-- Eyes (Curious, Vibrant Green/Hazel Iris) -->
+                  <!-- Left Eye -->
+                  <g transform="translate(141, 114)">
+                    <ellipse cx="6" cy="3" rx="5.2" ry="3.5" fill="#ffffff" />
+                    <circle cx="6.2" cy="3" r="2.4" fill="#1b4d3e" />
+                    <circle cx="7" cy="2.2" r="0.9" fill="#ffffff" />
+                    <!-- Animated Blinking Eyelid -->
+                    <rect x="0" y="0" width="12" height="7" rx="2" fill="#cf946f" class="eth-eyelid" />
+                  </g>
+                  <!-- Right Eye -->
+                  <g transform="translate(167, 114)">
+                    <ellipse cx="6" cy="3" rx="5.2" ry="3.5" fill="#ffffff" />
+                    <circle cx="5.8" cy="3" r="2.4" fill="#1b4d3e" />
+                    <circle cx="6.6" cy="2.2" r="0.9" fill="#ffffff" />
+                    <!-- Animated Blinking Eyelid -->
+                    <rect x="0" y="0" width="12" height="7" rx="2" fill="#cf946f" class="eth-eyelid" />
+                  </g>
+
+                  <!-- Cleanroom Safety Spectacles (Modern Mint-accented Frame) -->
+                  <g id="ethan-spectacles">
+                    <!-- Left Lens Frame -->
+                    <rect x="137" y="108" width="18" height="15" rx="4" fill="none" stroke="#00a876" stroke-width="1.8" />
+                    <!-- Right Lens Frame -->
+                    <rect x="165" y="108" width="18" height="15" rx="4" fill="none" stroke="#00a876" stroke-width="1.8" />
+                    <!-- Bridge and Temples -->
+                    <line x1="155" y1="113" x2="165" y2="113" stroke="#00a876" stroke-width="1.8" />
+                    <line x1="137" y1="112" x2="131" y2="115" stroke="#00a876" stroke-width="1.5" />
+                    <line x1="183" y1="112" x2="189" y2="115" stroke="#00a876" stroke-width="1.5" />
+                    <!-- Lens Glare -->
+                    <path d="M 139 110 L 148 120" stroke="#00f2a9" stroke-width="1.2" opacity="0.75" stroke-linecap="round" />
+                    <path d="M 167 110 L 176 120" stroke="#00f2a9" stroke-width="1.2" opacity="0.75" stroke-linecap="round" />
+                  </g>
+
+                  <!-- Nose (Straight, Youthful) -->
+                  <path d="M 158 116 L 160 131 L 157 133" stroke="#c2835d" stroke-width="1.6" fill="none" stroke-linejoin="round" />
+
+                  <!-- MOUTH: RESTING and ANIMATED SPEAKING STATES -->
+                  <g id="ethan-mouth-group">
+                    <!-- Resting Mouth (Curious, inquisitive smile) -->
+                    <path d="M 152 145 Q 160 150 168 145" stroke="#924a2c" stroke-width="2.2" fill="none" stroke-linecap="round" class="eth-mouth-rest" />
+
+                    <!-- Speaking Animated Mouth (Viseme flap aperture for speech) -->
+                    <g class="eth-mouth-open">
+                      <ellipse cx="160" cy="146" rx="6.8" ry="4.8" fill="#541b12" stroke="#924a2c" stroke-width="1.2" />
+                      <path d="M 155 144 Q 160 145 165 144" stroke="#ffffff" stroke-width="1.8" fill="none" />
+                      <path d="M 157 148 Q 160 149 163 148" stroke="#e17055" stroke-width="1.6" fill="none" />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <div class="char-nameplate nameplate-ethan">
+              <div class="char-indicator-dot"></div>
+              <div class="char-id-block">
+                <span class="char-title">ETHAN</span>
+                <span class="char-role">Junior Researcher</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             LAYER 3: CLEANROOM TELEMETRY OVERLAY
+             =================================================================== -->
+        <div class="cinematic-telemetry-overlay" id="cinematic-telemetry-overlay">
+          <div class="hud-top-left">
+            <span class="hud-tag">CLEANROOM: <strong class="hud-green">ISO 4 / CLASS 10</strong></span>
+            <span class="hud-tag">LAMINAR FLOW: <strong class="hud-cyan">0.45 m/s</strong></span>
+          </div>
+          <div class="hud-top-right">
+            <span class="hud-tag" id="hud-viva-concept">SOLID STATE DEVICE PHYSICS</span>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             LAYER 4: VISUAL NOVEL DIALOGUE HUD
+             =================================================================== -->
+        <section class="dialogue-hud" id="dialogue-hud" aria-label="Dialogue Subtitles">
+          <div class="dialogue-header">
+            <div class="speaker-badge-container">
+              <div id="subtitle-speaker-badge" class="speaker-badge speaker-narrator">
+                <span id="speaker-name">NARRATOR</span>
+              </div>
+            </div>
+            <div id="act-indicator" class="act-indicator">ACT 1 OF 6 • 00:00 / 05:00</div>
+          </div>
+
+          <div class="dialogue-body">
+            <p class="dialogue-text" id="subtitle-text">
+              Late evening inside an advanced Class 1 ISO 4 semiconductor cleanroom research facility. Amid the hum of vacuum deposition chambers and robotic wafer handlers, the building blocks of modern civilization take shape.
+            </p>
+          </div>
+
+          <div class="dialogue-footer">
+            <div class="dialogue-controls-hint">
+              <span>Space: Play/Pause</span>
+              <span>[←/→]: Seek ±10s</span>
+              <span>[1-6]: Jump Act</span>
+            </div>
+            <div class="dialogue-progress-track">
+              <div id="dialogue-progress-fill" class="dialogue-progress-fill"></div>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /#presentation-stage -->
+
+      <!-- Timeline & Playback Controller Bar -->
+      <div class="presentation-controls-bar">
+        <!-- Scrub Track -->
+        <div class="timeline-scrub-container" id="timeline-scrub" title="Seek Presentation">
+          <div class="timeline-progress-fill" id="timeline-progress"></div>
+        </div>
+
+        <!-- Action Controls Row -->
+        <div class="controller-row">
+          <div class="controller-left">
+            <button class="ctrl-btn ctrl-btn-play" id="play-pause-btn" title="Play / Pause (Spacebar)">
+              <span id="play-pause-icon">▶</span>
+            </button>
+            <button class="ctrl-btn" id="skip-back-btn" title="Rewind 10 Seconds (Left Arrow)">↺</button>
+            <button class="ctrl-btn" id="skip-forward-btn" title="Fast Forward 10 Seconds (Right Arrow)">↻</button>
+            <button class="ctrl-btn" id="restart-btn" title="Restart from Beginning">⏮</button>
+            <span class="time-display" id="time-display">00:00 / 05:00</span>
+          </div>
+
+          <div class="controller-center">
+            <span class="act-display" id="act-display">ACT 1 OF 6: <span class="act-name">THE DISCOVERY</span></span>
+          </div>
+
+          <div class="controller-right">
+            <select class="speed-select" id="speed-select" title="Playback Speed">
+              <option value="0.75">0.75x</option>
+              <option value="1.0" selected>1.0x (Normal)</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+            </select>
+            <button class="ctrl-btn" id="volume-btn" title="Mute / Unmute (M)">🔊</button>
+            <button class="ctrl-btn" id="fullscreen-btn" title="Toggle Fullscreen (F)">⛶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       3. TECHNICAL SPECS & VIVA MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="tech-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn">&times;</button>
+      <h3 style="color: #00d2ff; margin-bottom: 0.5rem; font-size: 1.3rem;">Scientific Specifications & Viva Questions</h3>
+      <p style="font-size: 0.85rem; color: #9ab4cc; margin-bottom: 1.2rem;">
+        Language Lab & Electronics and Communication Engineering Academic Reference | Student: Anuska Ghosh (Roll 66)
+      </p>
+
+      <div style="margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.6;">
+        <h4 style="color: #ffd11a; margin-bottom: 0.4rem;">1. Shichman-Hodges Device Equations</h4>
+        <p><strong>Linear Region (V_DS &lt; V_GS - V_TH):</strong><br>
+        <code>I_D = beta * [(V_GS - V_TH) * V_DS - (V_DS^2 / 2)]</code></p>
+        <p><strong>Saturation Region (V_DS &ge; V_GS - V_TH):</strong><br>
+        <code>I_D = (beta / 2) * (V_GS - V_TH)^2</code></p>
+        <p>Where transconductance parameter <code>beta = mu_n * C_ox * (W/L) = 1.000 mA/V^2</code>, and <code>V_TH = 0.70 V</code>.</p>
+      </div>
+
+      <div style="margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.6;">
+        <h4 style="color: #00f2a9; margin-bottom: 0.4rem;">2. ECE Viva Examination Questions & Answers</h4>
+        <p><strong>Q1: Why does MOSFET current saturate as V_DS increases?</strong><br>
+        <em>A:</em> As V_DS rises, the vertical oxide field at the drain end drops to (V_GS - V_DS). When V_DS reaches V_GS - V_TH, this field drops below V_TH, causing the inversion layer to pinch off at the drain boundary. Excess voltage drops across the pinch-off space-charge region, keeping drain current clamped.</p>
+
+        <p style="margin-top: 0.6rem;"><strong>Q2: What is the physical origin of the built-in potential in a PN junction?</strong><br>
+        <em>A:</em> Thermal carrier diffusion across the metallurgical boundary unmasks fixed ionized dopants (NA- on P-side, ND+ on N-side). This space charge establishes an internal electric field opposing further diffusion. At thermal equilibrium, drift balances diffusion, yielding V_bi = V_T * ln(NA*ND / ni^2) &approx; 0.75 V.</p>
+      </div>
+
+      <div style="text-align: right;">
+        <button class="btn btn-primary modal-close-btn-bottom modal-close-btn" style="position: static;">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. OUTRO & ACADEMIC CREDITS MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="outro-modal">
+    <div class="modal-card" style="text-align: center;">
+      <h3 style="color: #00d2ff; font-size: 1.8rem; margin-bottom: 0.4rem; text-transform: uppercase;">Inside The Silicon</h3>
+      <h4 style="color: #ffffff; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 500;">The Science Behind Semiconductor Microchips</h4>
+
+      <p style="color: #9ab4cc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        <em>"Every great technological revolution begins with something remarkably small. And inside every chip lies an entire world of science."</em>
+      </p>
+
+      <div style="background: rgba(10,18,29,0.8); border: 1px solid #1a2d47; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.8rem; font-size: 0.88rem; color: #a4c0db; text-align: left;">
+        <p style="margin-bottom: 6px;"><strong>Student Name:</strong> Anuska Ghosh</p>
+        <p style="margin-bottom: 6px;"><strong>Course:</strong> B.Tech First Year (ECE)</p>
+        <p style="margin-bottom: 6px;"><strong>Section:</strong> B4 | <strong>Roll Number:</strong> 66</p>
+        <p style="margin-bottom: 6px;"><strong>Academic Year:</strong> 2026–2027</p>
+        <p><strong>Department:</strong> Language Lab / Electronics and Communication Engineering</p>
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="btn btn-primary btn-large" id="replay-presentation-btn">↺ Replay Presentation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="static/js/data/dialogue-data.js"></script>
+  <script src="static/js/audio-voice-synthesizer.js"></script>
+  <script src="static/js/ambient-particles.js"></script>
+  <script src="static/js/character_anim.js"></script>
+  <script src="static/js/visualizers/silicon-lattice.js"></script>
+  <script src="static/js/visualizers/pn-junction.js"></script>
+  <script src="static/js/visualizers/mosfet-transistor.js"></script>
+  <script src="static/js/visualizers/ic-scale-zoom.js"></script>
+  <script src="static/js/matlab-simulator.js"></script>
+  <script src="static/js/presentation-engine.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>
